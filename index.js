@@ -15,18 +15,12 @@
 
 
 
-        if (!username || !role || !email || !password || !passwordRepeat) {
+       if (!username || !role || !email || !password || !passwordRepeat) {
             error.textContent = 'Пожалуйста, заполните все поля';
             document.querySelectorAll('input').forEach(input => {
                 if (!input.value) {
                     input.style.borderColor = 'red';
-                } else if (password !== passwordRepeat) {
-                    error.textContent = 'Пароли не совпадают';
-                    document.querySelectorAll('input[type="password"]').forEach(input => {
-                        input.style.borderColor = 'red';
-                    });
-
-                }
+                } 
                 else {
                     input.style.borderColor = 'green';
                 }
@@ -34,10 +28,25 @@
             return;
         }
 
-        if (password.length < 7) {
-            error.textContent = 'Пароль должен содержать не менее 7 символов';
+        if (password !== passwordRepeat) {
+            error.textContent = 'Пароли не совпадают';
+            document.querySelectorAll('input[type="password"]').forEach(input => {
+                input.style.borderColor = 'red';
+            });
             return;
         }
+        if (password.length < 7) {
+            error.textContent = 'Пароль должен содержать не менее 7 символов';
+            document.querySelectorAll('input[type="password"]').forEach(input => {
+                input.style.borderColor = 'red';
+            });
+            return;
+        }
+        document.querySelectorAll('input[type="password"]').forEach(input => {
+            input.style.borderColor = 'green';
+        });
+
+
 
         if (!consent) {
             error.textContent = 'Вы должны дать согласие на обработку персональных данных';
